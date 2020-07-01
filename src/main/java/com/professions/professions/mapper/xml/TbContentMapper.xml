@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.professions.professions.mapper.TbContentMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.professions.professions.entity.TbContent">
+        <id column="id" property="id" />
+        <result column="category_id" property="categoryId" />
+        <result column="title" property="title" />
+        <result column="title_desc" property="titleDesc" />
+        <result column="content" property="content" />
+        <result column="created" property="created" />
+        <result column="updated" property="updated" />
+    </resultMap>
+
+</mapper>

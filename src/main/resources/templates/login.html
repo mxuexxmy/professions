@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="include/include :: header('系统管理员|登录')"/>
+</head>
+<body class="hold-transition login-page">
+<div class="login-box">
+    <div class="login-logo">
+        <h1 th:text="${school}">AdminPTPM</h1>
+    </div>
+
+    <br>
+
+    <div class="login-logo">
+        <a href="#"> <b>专业培养方案管理系统</b></a>
+    </div>
+    <!-- /.login-logo -->
+    <div class="login-box-body">
+        <p class="login-box-msg"> <strong>欢迎管理员登录</strong></p>
+
+        <form action="/login" method="post" >
+
+            <div class="alert alert-danger alert-dismissible"  th:if="${message != null}"  >
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true" >&times;</button>
+                <strong th:text="${message}"></strong>
+            </div>
+
+            <div class="form-group has-feedback">
+                <input type="text" name="usernumber" class="form-control" placeholder="用户名">
+                <span class="glyphicon glyphicon-user form-control-feedback"></span>
+            </div>
+
+            <div class="form-group has-feedback">
+                <input type="password" name="password" class="form-control" placeholder="密码">
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-8">
+                    <div class="checkbox icheck">
+                        <label>
+                            <input  type="checkbox"> 记住我
+                        </label>
+                    </div>
+                </div>
+
+                <!-- /.col -->
+                <div class="col-xs-4">
+                    <button  type="submit" class="btn btn-primary btn-block btn-flat" >登录</button>
+                </div>
+                <!-- /.col -->
+            </div>
+        </form>
+
+
+    </div>
+    <!-- /.login-box-body -->
+</div>
+
+<!-- /.login-box -->
+<!-- /.content-wrapper -->
+<footer class="modal-footer">
+    <div class="pull-right hidden-xs center-block">
+        <b>Version</b> 1.0.0
+    </div>
+    <strong>Copyright &copy; 2020 <a href="#">17软件工程-第二组</a>.</strong> &nbsp; 龙兴 &nbsp; 杨定昌 &nbsp; 王恩琴 &nbsp; 晏敏 &nbsp; 罗小春 &nbsp;&nbsp;&nbsp;
+</footer>
+
+<th:block th:include="include/include :: footer"/>
+
+<script>
+    $(function () {
+        $('input').iCheck({
+            checkboxClass: 'icheckbox_square-blue',
+            radioClass: 'iradio_square-blue',
+            increaseArea: '20%' /* optional */
+        });
+    });
+</script>
+</body>
+</html>
