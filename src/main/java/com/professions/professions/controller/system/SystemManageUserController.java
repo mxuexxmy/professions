@@ -144,7 +144,7 @@ public class SystemManageUserController {
         int cont = tbUserService.count(wrapper);
         List<TbUser> userList = tbUserService.list(wrapper);
         result.put("draw", draw);
-        result.put("recordsTotal",cont );
+        result.put("recordsTotal",cont);
         result.put("recordsFiltered",  cont);
         result.put("data", userList);
         result.put("error","");
@@ -175,7 +175,5 @@ public class SystemManageUserController {
         tbUserService.removeById(id);
         return "redirect:/system/user/list";
     }
-
-
 
 }

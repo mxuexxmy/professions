@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <th:block th:include="include/include :: header('学院列表')"/>
+    <th:block th:include="include/include :: header('新建学院')"/>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -21,7 +21,7 @@
             </h1>
             <ol class="breadcrumb">
                 <li><a href="/system/college/list"><i class="fa fa-dashboard"></i> 新建学院</a></li>
-                <li><a href="/system/main"><i class="fa fa-dashboard"></i> 首页</a></li>
+                <li><a href="/system/main"><i class="fa fa-dashboard"></i>首页</a></li>
                 <li class="active">控制面板</li>
             </ol>
         </section>
@@ -48,8 +48,6 @@
                                             <input type="text" class="form-control"  id="username" th:field="*{tbCollege.name}" th:value="${tbCollege.name}" placeholder="学院">
                                         </div>
                                     </div>
-
-
 
                                     <div class="box-footer">
                                         <button type="button" class="btn btn-default"  onclick="history.go(-1)">返回</button>
