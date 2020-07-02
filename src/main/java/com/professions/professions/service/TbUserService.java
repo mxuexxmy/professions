@@ -1,6 +1,7 @@
 package com.professions.professions.service;
 
 import com.professions.professions.commons.dto.BaseResult;
+import com.professions.professions.commons.dto.PageInfo;
 import com.professions.professions.entity.TbUser;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -36,4 +37,8 @@ public interface TbUserService extends IService<TbUser> {
      * @return
      */
     BaseResult saveUser(TbUser tbUser);
+
+
+
+
 }

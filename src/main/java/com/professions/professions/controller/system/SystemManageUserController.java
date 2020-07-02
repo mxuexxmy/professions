@@ -1,11 +1,17 @@
 package com.professions.professions.controller.system;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.professions.professions.commons.contant.AdminPermission;
 import com.professions.professions.commons.dto.BaseResult;
+import com.professions.professions.commons.dto.PageInfo;
 import com.professions.professions.entity.TbUser;
 import com.professions.professions.service.TbUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.util.DigestUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -13,7 +19,10 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -37,8 +46,6 @@ public class SystemManageUserController {
      */
     @RequestMapping(value = "list", method = RequestMethod.GET)
     public String detail(HttpSession httpSession, ModelMap map) {
-        TbUser user = (TbUser) httpSession.getAttribute("user");
-        map.addAttribute("users",tbUserService.selectByAuthority(user.getAuthority() + 1));
         return "system/user_list";
     }
 
@@ -71,7 +78,9 @@ public class SystemManageUserController {
             map.addAttribute("inf", "新建用户");
             return "system/user_form";
         }
-
+        tbUser.setTitle("学院管理员");
+        tbUser.setAuthority(AdminPermission.CollegeAdmin);
+        tbUser.setPassword(DigestUtils.md5DigestAsHex(tbUser.getPassword().getBytes()));
         tbUserService.save(tbUser);
 
         return "redirect:/system/user/list";
@@ -104,66 +113,67 @@ public class SystemManageUserController {
             map.addAttribute("inf", "修改用户");
             return "system/user_form";
         }
-
+        tbUser.setPassword(DigestUtils.md5DigestAsHex(tbUser.getPassword().getBytes()));
         tbUserService.saveOrUpdate(tbUser);
         return "redirect:/system/user/list";
     }
 
+    /**
+     * 分页查询
+     * @param request
+     * @param tbUser
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "page", method = RequestMethod.GET)
+     public Map<String, Object> page(HttpServletRequest request, TbUser tbUser) {
+        Map<String, Object> result = new HashMap<>();
+
+        String strDraw = request.getParameter("draw");
+        String strStart = request.getParameter("start");
+        String strLength = request.getParameter("length");
+
+        int draw = strDraw == null ? 0 : Integer.parseInt(strDraw);
+        int start = strStart == null ? 0 : Integer.parseInt(strStart);
+        int length = strLength == null ? 10 : Integer.parseInt(strLength);
+
+        QueryWrapper<TbUser> wrapper = new QueryWrapper<>();
+        wrapper.eq("authority", AdminPermission.CollegeAdmin);
 
 
-//    /**
-//     * 新建用户或编辑用户
-//     */
-//    @RequestMapping(value ="form", method = RequestMethod.GET)
-//    public ModelAndView user_form( HttpServletRequest request, BaseResult baseResult) {
-//        ModelAndView mv  = new ModelAndView();
-//        mv.addObject(new TbUser());
-//        mv.addObject("baseResult",baseResult);
-//        mv.setViewName("system/user_form");
-//        return mv;
-//    }
-//
-//    /**
-//     * 新建用户或编辑用户
-//     */
-//    @RequestMapping(value ="form/{id}", method = RequestMethod.GET)
-//    public ModelAndView user_form(@PathVariable("id") Long id, HttpServletRequest request, BaseResult baseResult) {
-//        ModelAndView mv  = new ModelAndView();
-//        System.out.println(tbUserService.getById(id));
-//        mv.addObject("tbUser",  tbUserService.getById(id) );
-//        mv.addObject("baseResult",baseResult);
-//        mv.setViewName("system/user_form");
-//        return mv;
-//    }
-//
-//    /**
-//     * 用户信息保持
-//     */
-//    @RequestMapping(value = "save", method = RequestMethod.POST)
-//    public ModelAndView save(@ModelAttribute TbUser tbUser){
-//        ModelAndView mv = new ModelAndView();
-//        BaseResult baseResult=  tbUserService.saveUser(tbUser);
-//        // 保存成功
-//        if (BaseResult.STATUS_SUCCESS == baseResult.getStatus()) {
-//            mv.addObject("baseResult", baseResult);
-//            mv.setViewName("redirect:/system/user/list");
-//            return mv;
-//        }
-//        // 保持失败
-//        else {
-//            mv.addObject("baseResult",baseResult);
-//            mv.setViewName("system/user_form");
-//            return mv;
-//        }
-//    }
+        int cont = tbUserService.count(wrapper);
+        List<TbUser> userList = tbUserService.list(wrapper);
+        result.put("draw", draw);
+        result.put("recordsTotal",cont );
+        result.put("recordsFiltered",  cont);
+        result.put("data", userList);
+        result.put("error","");
+        return  result;
+     }
 
 
     /**
-     * 用户信息详情
+     * 显示用户详情
+     *
+     * @return
      */
-    @RequestMapping(value = "detail", method = RequestMethod.GET)
-    public String detail(ModelMap map) {
-        return "detail";
+    @RequestMapping(value = "detail/{id}", method = RequestMethod.GET)
+    public String detail(@PathVariable Long id, ModelMap map) {
+        map.addAttribute("detail", tbUserService.getById(id));
+        return "system/detail";
+    }
+
+
+    /**
+     * 删除用户信息
+     *
+     * @param id
+     * @return
+     */
+    @RequestMapping( value = "delete/{id}", method = RequestMethod.GET)
+    public String delete(@PathVariable  Long id) {
+        tbUserService.removeById(id);
+        return "redirect:/system/user/list";
     }
 
 

@@ -1,74 +1,102 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <th:block th:include="include/include :: header('用户信息详情')"/>
+    <th:block th:include="include/include :: header('专业培养方案管理系统 | 首页')"/>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 
+
     <th:block th:replace="include/snav :: nav"/>
     <th:block th:replace="include/smenu :: menu"/>
 
-
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper" >
+    <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                用户资料
-                <small>用户信息详情</small>
+                用户管理
+                <small>用户详情</small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="/system/main"><i class="fa fa-dashboard"></i> 首页 </a></li>
-                <li class="active">用户资料</li>
+                <li><a href="/system/main"><i class="fa fa-dashboard"></i> 首页</a></li>
+                <li class="active">用户管理</li>
             </ol>
         </section>
 
-        <section class="section-content" >
-            <div class="row center-pill">
-                <div class="col-sm-5">
-                    <div class="ibox float-e-margins">
-                        <div class="ibox-title ibox-title-gray dashboard-header gray-bg">
-                            <h5>个人资料</h5>
+        <!-- Main content -->
+        <section class="content">
+
+            <div class="row">
+                <div class="col-md-12">
+
+                    <!-- About Me Box -->
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">用户详细信息</h3>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <strong><i class="fa fa-book margin-r-5"></i> 姓名</strong>
+
+                            <p class="text-muted">
+                              [[${detail.username}]]
+                            </p>
+
+                            <hr>
+
+                            <strong><i class="fa fa-map-marker margin-r-5"></i> 学院 </strong>
+
+                            <p class="text-muted">
+                                [[${detail.college}]]
+                            </p>
+
+                            <hr>
+
+                            <strong><i class="fa fa-pencil margin-r-5"></i> 工号</strong>
+
+                            <p class="text-muted">
+                                [[${detail.usernumber}]]
+                            </p>
+
+                            <hr>
+
+                            <strong><i class="fa fa-file-text-o margin-r-5"></i> 手机号 </strong>
+
+                            <p class="text-muted">
+                                [[${detail.phone}]]
+                            </p>
+
+                            <hr>
+                            <strong><i class="fa fa-file-text-o margin-r-5"></i> 职位 </strong>
+
+                            <p class="text-muted">
+                                [[${detail.title}]]
+                            </p>
                         </div>
 
-                        <!-- Profile Image -->
-                        <div class="box box-primary">
-                            <div class="box-body box-profile">
-                                <img class="profile-user-img img-responsive img-circle" src="../static/dist/img/user2-160x160.jpg" th:src="@{/dist/img/user2-160x160.jpg}" alt="用户资料 picture">
-
-                                <h3 class="profile-username text-center" th:text="${tb}" >Nina Mcintire</h3>
-
-                                <p class="text-muted text-center" th:text="${tbUser.getTitle()}">软件工程师</p>
-
-                                <ul class="list-group list-group-unbordered">
-                                    <li class="list-group-item">
-                                        <b>学院</b> <a class="pull-right" ></a>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <b>教工号</b> <a class="pull-right" >543</a>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <b>号码</b> <a class="pull-right" >13,287</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <!-- /.box-body -->
+                        <div class="box-footer">
+                            <button type="button" class="btn btn-default"  onclick="history.go(-1)">返回</button>
                         </div>
-                        <!-- /.box -->
+                        <!-- /.box-body -->
                     </div>
+                    <!-- /.box -->
+
                 </div>
             </div>
         </section>
+
     </div>
 
     <th:block th:replace="include/copyright :: Copyright"/>
-
     <!-- Add the sidebar's background. This div must be placed
          immediately after the control sidebar -->
     <div class="control-sidebar-bg"></div>
 </div>
 <!-- ./wrapper -->
 <th:block th:include="include/include :: footer"/>
+
+
+
 </body>
 </html>
