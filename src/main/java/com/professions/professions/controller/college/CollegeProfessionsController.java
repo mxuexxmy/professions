@@ -1,11 +1,10 @@
-package com.professions.professions.controller.system;
-
+package com.professions.professions.controller.college;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.professions.professions.commons.contant.AdminPermission;
+import com.professions.professions.commons.contant.AuditUtils;
+import com.professions.professions.commons.contant.ContentUtils;
 import com.professions.professions.entity.TbCollege;
 import com.professions.professions.entity.TbContentCategory;
-import com.professions.professions.entity.TbUser;
 import com.professions.professions.service.TbContentCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,17 +21,16 @@ import java.util.Map;
  * 专业培养方案管理
  */
 @Controller
-@RequestMapping("system/profession")
-public class ProfessionsController {
+@RequestMapping("college/professions")
+public class CollegeProfessionsController {
 
     @Autowired
     private TbContentCategoryService tbContentCategoryService;
 
     @RequestMapping(value = "list", method = RequestMethod.GET)
     public String list() {
-        return "system/profession_list";
+        return "college/professions_list";
     }
-
 
     /**
      * 分页查询
@@ -54,8 +52,8 @@ public class ProfessionsController {
         int length = strLength == null ? 10 : Integer.parseInt(strLength);
 
         QueryWrapper<TbContentCategory> wrapper = new QueryWrapper<>();
-        wrapper.eq("parent_id", 0)
-                .ge("audit", 1);
+        wrapper.eq("parent_id", ContentUtils.PROFESSION_TITLE)
+                .ge("audit", AuditUtils.UNCHECKED);
 
 
 
@@ -68,6 +66,5 @@ public class ProfessionsController {
         result.put("error","");
         return  result;
     }
-
 
 }

@@ -118,23 +118,6 @@
                                         <th>操作</th>
                                     </tr>
                                     </thead>
-<!--                                    <tbody class="table-striped" >-->
-<!--                                    <tr th:each="userlist : ${users}">-->
-<!--                                        <td> <input type="checkbox" class="minimal"></td>-->
-<!--                                        <td th:text="${userlistStat.count}"></td>-->
-<!--                                        <td th:text="${userlist.username}">龙</td>-->
-<!--                                        <td th:text="${userlist.usernumber}">3838171722</td>-->
-<!--                                        <td th:text="${userlist.college}"> 软件工程</td>-->
-<!--                                        <td th:text="${userlist.phone}">10086</td>-->
-<!--                                        <td>-->
-<!--                                            <div class="btn-group">-->
-<!--                                                <button type="button"  class="btn btn-default btn-sm btn-success" ><i class="fa fa-fw  fa-search"></i>查看</button>-->
-<!--                                                <a type="button" th:href="@{/system/user/update/{userId}(userId=${userlist.id})}" class="btn btn-default btn-sm btn-info " data-toggle="modal" ><i class="fa fa-fw fa-pencil-square-o"></i>编辑</a>-->
-<!--                                                <button  type="button" class="btn btn-default btn-sm btn-danger" data-toggle="modal" data-target="#modal-danger"><i class="fa fa-fw fa-times "></i>删除</button>-->
-<!--                                            </div>-->
-<!--                                        </td>-->
-<!--                                    </tr>-->
-<!--                                    </tbody>-->
                                 </table>
                             </div>
                         </div>
@@ -144,7 +127,7 @@
         </section>
     </div>
 
-
+     <a th:href="@{system/}"></a>
 
     <!-- /.content-wrapper -->
 
@@ -184,7 +167,6 @@
 
         _dataTable = App.initDataTables("/system/user/page", _columns);
     });
-
 
 </script>
 </body>

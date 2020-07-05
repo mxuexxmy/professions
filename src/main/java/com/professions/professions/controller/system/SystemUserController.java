@@ -48,7 +48,7 @@ public class SystemUserController {
     }
 
     /**
-     *
+     * 修改个人信息
      * @param map
      * @param tbUser
      * @return
@@ -66,8 +66,7 @@ public class SystemUserController {
     }
 
     /**
-     * 修改用户密码
-     * @param map
+     * 修改个人密码
      * @param oldPassword
      * @param newPassword
      * @param request

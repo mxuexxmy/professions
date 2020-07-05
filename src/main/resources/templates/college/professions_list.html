@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="include/include :: header('专业培养方案管理')"/>
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+
+
+    <th:block th:replace="include/cnav :: nav"/>
+    <th:block th:replace="include/cmenu :: menu"/>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                专业培养方案管理
+                <small>专业培养方案列表</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="/college/main"><i class="fa fa-dashboard"></i> 首页</a></li>
+                <li class="active">专业培养方案列表</li>
+            </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box box-primary">
+
+                        <div class="box box-info box-info-search" style="display: none;">
+                            <div class="box-header">
+                                <h3 class="box-title">高级搜索</h3>
+                            </div>
+                            <div class="box-body">
+                                <div class="row form-horizontal">
+                                    <div class="col-xs-12 col-sm-3">
+                                        <div class="form-group">
+                                            <label for="profession" class="col-sm-4 control-label">专业培养方案</label>
+
+                                            <div class="col-sm-8">
+                                                <input id="profession" class="form-control" placeholder="专业培养方案" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="box-footer">
+                                <button type="button" class="btn btn-info pull-right" onclick="search();">搜索</button>
+                            </div>
+                        </div>
+
+                        <div class="box-header">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-sm btn-primary" onclick="$('.box-info-search').css('display') == 'none' ? $('.box-info-search').show('fast') : $('.box-info-search').hide('fast')"><i class="fa fa-search"></i> 搜索</button>
+                            </div>
+                        </div>
+
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <table id="_table" class="table table-bordered table-hover">
+                                <thead>
+                                <tr>
+                                    <th> <input type="checkbox" class="minimal icheck_master"></th>
+                                    <th >序号</th>
+                                    <th>培养方案名</th>
+                                    <th>审核状态</th>
+                                    <th>更新时间</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <th:block th:replace="include/copyright :: Copyright"/>
+    <!-- Add the sidebar's background. This div must be placed
+         immediately after the control sidebar -->
+    <div class="control-sidebar-bg"></div>
+</div>
+<!-- ./wrapper -->
+<th:block th:include="include/include :: footer"/>
+
+<script>
+    var _dataTable;
+
+    $(function () {
+        var _columns = [
+            {
+                "data": function (row, type, val, meta) {
+                    return '<input id="' + row.id + '" type="checkbox" class="minimal" />';
+                }
+            },
+            {"data": "id"},
+            {"data": "name"},
+            {"data": "audit"},
+            {"data": "updated"},
+            {
+                "data": function (row, type, val, meta) {
+                    return '<a type="button"  href="#" class="btn btn-sm btn-default" ><i class="fa fa-search"></i> 查看</a>&nbsp;&nbsp;&nbsp;' +
+                        '<a type="button" href="#" class="btn btn-default btn-sm btn-info " ><i class="fa fa-fw fa-pencil-square-o"></i>审核</a>&nbsp;&nbsp;&nbsp;'
+                }
+            }
+        ];
+
+        _dataTable = App.initDataTables("/college/professions/page", _columns);
+    });
+
+</script>
+
+</body>
+</html>

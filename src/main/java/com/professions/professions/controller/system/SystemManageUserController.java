@@ -6,7 +6,9 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.professions.professions.commons.contant.AdminPermission;
 import com.professions.professions.commons.dto.BaseResult;
 import com.professions.professions.commons.dto.PageInfo;
+import com.professions.professions.entity.TbCollege;
 import com.professions.professions.entity.TbUser;
+import com.professions.professions.service.TbCollegeService;
 import com.professions.professions.service.TbUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -39,6 +41,8 @@ public class SystemManageUserController {
     @Autowired
     private TbUserService tbUserService;
 
+    @Autowired
+    private TbCollegeService tbCollegeService;
 
     /**
      * 用户列表页面
@@ -58,31 +62,32 @@ public class SystemManageUserController {
     @RequestMapping(value = "/form", method = RequestMethod.GET)
     public String createUserForm(ModelMap map) {
         map.addAttribute("tbUser", new TbUser());
+        map.addAttribute("colleges", tbCollegeService.list());
         map.addAttribute("actions", "form");
         map.addAttribute("inf", "新建用户");
         return "system/user_form";
     }
 
     /**
-     *  创建用户
+     *    创建用户
      *    处理 "/users" 的 POST 请求，用来获取用户列表
      *    通过 @ModelAttribute 绑定参数，也通过 @RequestParam 从页面中传递参数
      */
     @RequestMapping(value = "/form", method = RequestMethod.POST)
     public String postUser(ModelMap map,
                            @ModelAttribute @Valid TbUser tbUser,
+                           @RequestParam("college") String college,
                            BindingResult bindingResult) {
-
         if (bindingResult.hasErrors()) {
             map.addAttribute("actions", "form");
             map.addAttribute("inf", "新建用户");
             return "system/user_form";
         }
+        tbUser.setCollege(college);
         tbUser.setTitle("学院管理员");
         tbUser.setAuthority(AdminPermission.CollegeAdmin);
         tbUser.setPassword(DigestUtils.md5DigestAsHex(tbUser.getPassword().getBytes()));
         tbUserService.save(tbUser);
-
         return "redirect:/system/user/list";
     }
 
@@ -93,6 +98,7 @@ public class SystemManageUserController {
      */
     @RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
     public String getUser(@PathVariable Long id, ModelMap map) {
+        map.addAttribute("colleges", tbCollegeService.list());
         map.addAttribute("tbUser", tbUserService.getById(id));
         map.addAttribute("actions", "update");
         map.addAttribute("inf", "修改用户");
@@ -106,6 +112,7 @@ public class SystemManageUserController {
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String putUser(ModelMap map,
                           @ModelAttribute @Valid TbUser tbUser,
+                          @RequestParam("college") String college,
                           BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
@@ -113,6 +120,7 @@ public class SystemManageUserController {
             map.addAttribute("inf", "修改用户");
             return "system/user_form";
         }
+        tbUser.setCollege(college);
         tbUser.setPassword(DigestUtils.md5DigestAsHex(tbUser.getPassword().getBytes()));
         tbUserService.saveOrUpdate(tbUser);
         return "redirect:/system/user/list";

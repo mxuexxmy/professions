@@ -26,6 +26,9 @@
     <link rel="stylesheet" th:href="@{/plugins/iCheck/square/blue.css}">
     <!-- DataTables -->
     <link rel="stylesheet" th:href="@{/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css}">
+    <!-- treeTable -->
+    <link rel="stylesheet" th:href="@{/plugins/treeTable/themes/vsStyle/treeTable.css}" />
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- 警告：Respond.js 不支持 file:// 方式查看（即本地方式查看）-->
     <!--[if lt IE 9]>
@@ -40,6 +43,8 @@
 <div th:fragment="footer">
     <!-- jQuery 3 -->
     <script  th:src="@{/bower_components/jquery/dist/jquery.min.js}"></script>
+    <!-- jQuery UI 1.11.4 -->
+    <script  th:src="@{/bower_components/jquery-ui/jquery-ui.min.js}"></script>
     <!-- Bootstrap 3.3.7 -->
     <script  th:src="@{/bower_components/bootstrap/dist/js/bootstrap.min.js}"></script>
     <!-- Slimscroll -->
@@ -54,6 +59,9 @@
     <!-- DataTables -->
     <script th:src="@{/bower_components/datatables.net/js/jquery.dataTables.min.js}"></script>
     <script th:src="@{/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js}"></script>
+
+    <script th:src="@{/plugins/treeTable/jquery.treeTable.js}"></script>
+
     <script th:src="@{/app/app.js}"></script>
 
 </div>

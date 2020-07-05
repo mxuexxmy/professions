@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <th:block th:include="include/include :: header('专业培养方案管理系统 | 首页')"/>
+    <th:block th:include="include/include :: header('用户详情')"/>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -37,7 +37,7 @@
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
-                            <strong><i class="fa fa-book margin-r-5"></i> 姓名</strong>
+                            <strong><i class="fa   fa-user margin-r-5"></i> 姓名</strong>
 
                             <p class="text-muted">
                               [[${detail.username}]]
@@ -61,14 +61,14 @@
 
                             <hr>
 
-                            <strong><i class="fa fa-file-text-o margin-r-5"></i> 手机号 </strong>
+                            <strong><i class="fa fa-phone margin-r-5"></i> 手机号 </strong>
 
                             <p class="text-muted">
                                 [[${detail.phone}]]
                             </p>
 
                             <hr>
-                            <strong><i class="fa fa-file-text-o margin-r-5"></i> 职位 </strong>
+                            <strong><i class="fa  fa-user-plus margin-r-5"></i> 职位 </strong>
 
                             <p class="text-muted">
                                 [[${detail.title}]]

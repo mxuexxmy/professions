@@ -28,7 +28,7 @@ public class TbProfession implements Serializable {
      * 专业ID
      */
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 学院名

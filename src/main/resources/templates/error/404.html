@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="include/include :: header('404页面')"/>
+</head>
+<body >
+<div>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="error-page">
+                <h2 class="headline text-yellow"> 404</h2>
+
+                <div class="error-content">
+                    <h3><i class="fa fa-warning text-yellow"></i> 哎呀！找不到网页。</h3>
+
+                    <p>
+                        我们找不到你需要的网页。
+                        同时，您可以<a  onclick="history.go(-1)">返回前一页</a>
+                    </p>
+
+                </div>
+                <!-- /.error-content -->
+            </div>
+            <!-- /.error-page -->
+        </section>
+
+</div>
+<!-- ./wrapper -->
+<th:block th:include="include/include :: footer"/>
+</body>
+</html>

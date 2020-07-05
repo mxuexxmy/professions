@@ -46,7 +46,7 @@ public class LoginController {
         TbUser user = tbUserService.getByUsername(usernumber, password);
 
         // 登录失败
-        if (user == null || user.getAuthority() != AdminPermission.SystemAdmin) {
+        if (user == null) {
             mv.addObject("message","用户名或者密码错误，请重新输入");
             mv.setViewName("login");
             return mv;
@@ -56,9 +56,9 @@ public class LoginController {
             httpServletRequest.getSession().setAttribute(ConstantUtils.SESSION_USER, user);
             if (user.getAuthority() == AdminPermission.SystemAdmin) {
                 mv.setViewName("redirect:/system/main");
-            } else if(user.getAuthority() == AdminPermission.ProfessionAdmin) {
+            } else if(user.getAuthority() == AdminPermission.CollegeAdmin) {
                 mv.setViewName("redirect:/college/main");
-            } else {
+            } else if (user.getAuthority() == AdminPermission.ProfessionAdmin){
                 mv.setViewName("redirect:/profession/main");
             }
             return mv;

@@ -56,8 +56,11 @@ var App = function () {
             "ajax": {
                 "url": url
             },
+            // 分页按钮显示选项
+            "pagingType": "full_numbers",
             "columns": columns,
             "language": {
+                // 是否开启本地分页
                 "sProcessing": "处理中...",
                 "sLengthMenu": "显示 _MENU_ 项结果",
                 "sZeroRecords": "没有匹配结果",

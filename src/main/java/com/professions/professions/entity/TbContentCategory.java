@@ -10,9 +10,11 @@ import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import javax.net.ssl.SSLSession;
+
 /**
  * <p>
- * 专业培养方案内容分类
+ * 专业培养方案类目
  * </p>
  *
  * @author mxuexxmy

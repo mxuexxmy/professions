@@ -38,7 +38,7 @@ public class TbGrade implements Serializable {
     /**
      * 学院ID
      */
-    private Integer collegeId;
+    private Long collegeId;
 
     /**
      * 创建时间

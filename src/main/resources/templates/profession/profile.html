@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="include/include :: header('个人中心')"/>
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+
+    <th:block th:replace="include/pnav :: nav"/>
+
+    <th:block th:replace="include/pmenu :: menu"/>
+
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper" >
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                用户资料
+                <small>个人中心</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="/profession/main"><i class="fa fa-dashboard"></i> 首页 </a></li>
+                <li class="active">用户资料</li>
+            </ol>
+        </section>
+
+        <section class="content" >
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title ibox-title-gray dashboard-header gray-bg">
+                            <h5>个人资料</h5>
+                        </div>
+
+                        <!-- Profile Image -->
+                        <div class="box box-primary">
+                            <div class="box-body box-profile">
+                                <img class="profile-user-img img-responsive img-circle" src="../static/dist/img/user2-160x160.jpg" th:src="@{/dist/img/user2-160x160.jpg}" alt="用户资料 picture">
+
+                                <h3 class="profile-username text-center" th:text="${session.user.getUsername()}">Nina Mcintire</h3>
+
+                                <p class="text-muted text-center" th:text="${session.user.getTitle()}">软件工程师</p>
+
+                                <ul class="list-group list-group-unbordered">
+                                    <li class="list-group-item">
+                                        <b>学院</b> <a class="pull-right" th:text="${session.user.getCollege()}"></a>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <b>职工号</b> <a class="pull-right" th:text="${session.user.getUsernumber()}">543</a>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <b>号码</b> <a class="pull-right" th:text="${session.user.getPhone()}">13,287</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- /.box-body -->
+                        </div>
+                        <!-- /.box -->
+                    </div>
+                </div>
+
+                <div class="col-sm-9 about">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title ibox-title-gray dashboard-header">
+                            <h5>基本资料</h5>
+                        </div>
+                        <div class="ibox-content">
+                            <div class="nav-tabs-custom">
+                                <ul class="nav nav-tabs">
+                                    <li class="active"><a href="#user_info" data-toggle="tab" aria-expanded="true">基本资料</a></li>
+                                    <li><a href="#modify_password" data-toggle="tab" aria-expanded="false">修改密码</a></li>
+                                </ul>
+                                <div class="tab-content">
+                                    <!--用户信息-->
+                                    <div class="tab-pane active" id="user_info" >
+                                        <form class="form-horizontal"  th:action="@{/system/profession/update}" id="form-user-edit" method="post">
+                                            <input type="hidden" name="id" th:value="${tbUser.id}"/>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">用户名称：</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" name="username" th:filed="*{tbUser.username}" th:value="*{tbUser.username}" placeholder="请输入用户名称">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">手机号码：</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" name="phone" maxlength="11" th:filed="*{tbUser.phone}" th:value="*{tbUser.phone}" placeholder="请输入手机号码">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">邮箱：</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" name="email" th:filed="*{tbUser.email}" th:value="*{tbUser.email}" placeholder="请输入邮箱">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-sm-offset-2 col-sm-10">
+                                                    <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-check"></i>保 存</button>&nbsp;
+                                                    <button type="button" class="btn btn-sm btn-danger" onclick="history.go(-1)"><i class="fa fa-reply-all"></i>关 闭 </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+
+                                    <!--修改密码-->
+                                    <div class="tab-pane" id="modify_password">
+                                        <form class="form-horizontal" th:action="@{/system/update/password}" id="form-user-resetPwd" method="post">
+
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">旧密码：</label>
+                                                <div class="col-sm-10">
+                                                    <input type="password" class="form-control" name="oldPassword"  id="oldPassword" placeholder="请输入旧密码">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">新密码：</label>
+                                                <div class="col-sm-10">
+                                                    <input type="password" class="form-control" name="newPassword" id="newPassword"   placeholder="请输入新密码">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">确认密码：</label>
+                                                <div class="col-sm-10">
+                                                    <input type="password" class="form-control" name="confirmPassword"  placeholder="请确认密码">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-sm-offset-2 col-sm-10">
+                                                    <button type="submit" class="btn btn-sm btn-primary" ><i class="fa fa-check"></i>保 存</button>&nbsp;
+                                                    <button type="button" class="btn btn-sm btn-danger" onclick="history.go(-1)"><i class="fa fa-reply-all"></i>关 闭 </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <th:block th:replace="include/copyright :: Copyright"/>
+
+    <!-- Add the sidebar's background. This div must be placed
+         immediately after the control sidebar -->
+    <div class="control-sidebar-bg"></div>
+</div>
+<!-- ./wrapper -->
+<th:block th:include="include/include :: footer"/>
+</body>
+</html>
