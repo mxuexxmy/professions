@@ -10,4 +10,10 @@ public class ConstantUtils {
      * 学院 session
      */
     public static final String SESSION_COLLEGE = "college";
+
+    /**
+     * 学校 session
+     */
+    public static final String SCHOOL_NAME = "school";
+
 }

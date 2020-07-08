@@ -86,9 +86,7 @@
     </div>
 
     <th:block th:replace="include/copyright :: Copyright"/>
-    <!-- Add the sidebar's background. This div must be placed
-         immediately after the control sidebar -->
-    <div class="control-sidebar-bg"></div>
+
 </div>
 <!-- ./wrapper -->
 <th:block th:include="include/include :: footer"/>
@@ -109,7 +107,7 @@
             {"data": "updated"},
             {
                 "data": function (row, type, val, meta) {
-                    return '<a type="button"  href="#" class="btn btn-sm btn-default" ><i class="fa fa-search"></i> 查看</a>&nbsp;&nbsp;&nbsp;' +
+                    return '<a type="button"  href="show" target="_blank" class="btn btn-sm btn-default" ><i class="fa fa-search"></i> 查看</a>&nbsp;&nbsp;&nbsp;' +
                         '<a type="button" href="#" class="btn btn-default btn-sm btn-info " ><i class="fa fa-fw fa-pencil-square-o"></i>审核</a>&nbsp;&nbsp;&nbsp;'
                 }
             }
