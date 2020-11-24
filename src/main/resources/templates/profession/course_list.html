@@ -29,6 +29,32 @@
             <div class="row">
                 <div class="col-xs-12">
                     <div class="box box-primary">
+                        <div class="box-header">
+                            <div class="btn-group">
+                                <a href="/content/create" type="button" class="btn btn-sm btn-default"><i class="fa fa-plus"></i> 新增</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <button type="button" class="btn btn-sm btn-default"><i class="fa fa-trash-o"></i> 删除</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <button type="button" class="btn btn-sm btn-primary" onclick="$('.box-info-search').css('display') == 'none' ? $('.box-info-search').show('fast') : $('.box-info-search').hide('fast')"><i class="fa fa-search"></i> 搜索</button>
+                            </div>
+                        </div>
+
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <table id="_table" class="table table-bordered table-responsive table-hover">
+                                <thead>
+                                <tr>
+                                    <th>序号</th>
+                                    <th>标题</th>
+                                    <th>标题描述</th>
+                                    <th>内容</th>
+                                    <th>更新时间</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -37,9 +63,6 @@
     </div>
 
     <th:block th:replace="include/copyright :: Copyright"/>
-    <!-- Add the sidebar's background. This div must be placed
-         immediately after the control sidebar -->
-    <div class="control-sidebar-bg"></div>
 </div>
 <!-- ./wrapper -->
 <th:block th:include="include/include :: footer"/>

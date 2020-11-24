@@ -38,17 +38,47 @@
                             </div>
                         </div>
 
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <table id="_table" class="table table-bordered table-responsive table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>序号</th>
+                                        <th>标题</th>
+                                        <th>标题描述</th>
+                                        <th>内容</th>
+                                        <th>更新时间</th>
+                                        <th>操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each=" content : ${contents} ">
+                                        <td th:text="${contentStat.index + 1}"></td>
+                                        <td th:text="${content.title}"></td>
+                                        <td >
+
+                                            <a type="button"  href="#" class="btn btn-sm btn-default" th:if=" ${content.titleDesc} != null"><i class="fa fa-search"></i> 查看</a>
+                                        </td>
+                                        <td>
+                                            <a type="button"  th:href="@{/content/showContent/{id}(id=${content.id})}" class="btn btn-sm btn-default" th:if="${content.content} != null" ><i class="fa fa-search"></i> 查看</a>
+                                        </td>
+                                        <td th:text="${content.updated}"></td>
+                                        <td>
+                                            <a type="button" th:href="@{/content/contentUpdate/{id}(id=${content.id})}" class="btn btn-default btn-sm btn-info " ><i class="fa fa-fw fa-pencil-square-o"></i>编辑</a> &nbsp;&nbsp;&nbsp;
+                                            <a type="button" th:href="@{/content/contentDelete/{id}(id=${content.id})}" class="btn btn-sm btn-danger" ><i class="fa fa-trash-o"></i> 删除</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
-
     </div>
 
     <th:block th:replace="include/copyright :: Copyright"/>
-    <!-- Add the sidebar's background. This div must be placed
-         immediately after the control sidebar -->
-    <div class="control-sidebar-bg"></div>
+
 </div>
 <!-- ./wrapper -->
 <th:block th:include="include/include :: footer"/>

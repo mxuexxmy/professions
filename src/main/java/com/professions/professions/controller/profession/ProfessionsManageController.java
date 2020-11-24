@@ -47,6 +47,28 @@ public class ProfessionsManageController {
     }
 
     /**
+     * 展示专业培养方案数据
+     * @param map
+     * @return
+     */
+    @RequestMapping(value = "show", method = RequestMethod.GET)
+    public String showProfessions(ModelMap map) {
+
+        return "system/professions_show";
+    }
+
+    /**
+     * 创建专业培养方案目录
+     * @param map
+     * @return
+     */
+    @RequestMapping(value = "create", method = RequestMethod.GET)
+    public String create(ModelMap map) {
+
+        return "profession/professions_create";
+    }
+
+    /**
      * 专业培养方案详情
      * @param map
      * @return

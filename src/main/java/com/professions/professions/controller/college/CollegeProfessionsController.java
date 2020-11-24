@@ -8,6 +8,7 @@ import com.professions.professions.entity.TbContentCategory;
 import com.professions.professions.service.TbContentCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -30,6 +31,17 @@ public class CollegeProfessionsController {
     @RequestMapping(value = "list", method = RequestMethod.GET)
     public String list() {
         return "college/professions_list";
+    }
+
+    /**
+     * 展示专业培养方案数据
+     * @param map
+     * @return
+     */
+    @RequestMapping(value = "show", method = RequestMethod.GET)
+    public String showProfessions(ModelMap map) {
+
+        return "system/professions_show";
     }
 
     /**

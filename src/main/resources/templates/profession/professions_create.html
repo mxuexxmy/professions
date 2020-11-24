@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="include/include :: header('新建培养方案目录')"/>
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+
+
+    <th:block th:replace="include/pnav :: nav"/>
+    <th:block th:replace="include/pmenu :: menu"/>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                专业培养方案管理
+                <small>新建培养方案目录</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="/profession/main"><i class="fa fa-dashboard"></i> 新建培养方案目录</a></li>
+                <li class="active">专业培养方案管理</li>
+            </ol>
+        </section>
+
+    </div>
+
+    <th:block th:replace="include/copyright :: Copyright"/>
+
+</div>
+<!-- ./wrapper -->
+<th:block th:include="include/include :: footer"/>
+
+</body>
+</html>

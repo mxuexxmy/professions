@@ -29,11 +29,9 @@ public class LoginController {
     @Autowired
     private TbUserService tbUserService;
 
-    @RequestMapping(value = {""}, method = RequestMethod.GET)
+    @RequestMapping(value = "login", method = RequestMethod.GET)
     public String login(ModelMap map) {
-        TbSchool school = tbSchoolService.getById(CollegeName.NAME);
-        String name = school.getName();
-        map.addAttribute("school",name);
+        map.addAttribute("school", tbSchoolService.getById(CollegeName.NAME));
         return "login";
     }
 

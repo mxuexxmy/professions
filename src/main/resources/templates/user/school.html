@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="include/include :: header('专业培养方案浏览')"/>
+</head>
+<body class="hold-transition skin-blue layout-top-nav">
+<div class="wrapper">
+
+    <th:block th:replace="include/uheader :: header"/>
+
+    <div class="content-wrapper">
+        <div class="container">
+            <!-- Content Header (页眉) -->
+            <section class="content-header">
+
+                <div class="row ">
+                    <h1 class="text-center" th:text="${session.school.name}">
+                    </h1>
+                    <form class="navbar-form text-center " role="search">
+                        <div class="form-group ">
+                            <input type="text" class="form-control" placeholder="请输入学院">
+                        </div>
+                        <button type="submit" class="btn btn-default">搜索</button>
+                    </form>
+                </div>
+
+            </section>
+
+            <!-- Main content -->
+            <section class="content">
+                <div class="box box-default">
+
+                    <div class="row">
+                        <div class="col-sm-6 col-md-4" th:each="college : ${colleges}">
+                            <div class="thumbnail">
+                                <img src="/dist/img/gues.jpg" alt="...">
+                                <div class="caption">
+                                    <h3 class="text-center" th:text="${college.name}">信息工程学院</h3>
+                                    <p class="text-center"><a th:href="@{/show/college/{id}(id=${college.id})}" class="btn btn-primary " role="button">浏览</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.box -->
+            </section>
+            <!-- /.content -->
+        </div>
+    </div>
+
+    <th:block th:replace="include/ufooter :: footer"/>
+
+</div>
+</div>
+<th:block th:include="include/include :: footer"/>
+</body>
+</html>

@@ -33,30 +33,46 @@
                         <div class="box-header">
                             <!-- /.tab-pane -->
                             <div class="tab-pane " id="settings">
-                                <form  class="form-horizontal" method="post">
-
+                                <form th:action="@{/content/save}"  class="form-horizontal"  method="post">
                                 <div class="form-group" >
                                     <label  class="col-sm-2 control-label" >父级目录</label>
                                     <div class="col-sm-10">
                                         <select class="form-control" name="name">
                                             <option value="-1">请选择</option>
-                                            <option  th:each="tbContentCategory :${tbContentCategories}"  th:value="*{tbContentCategory.name}" th:text="${tbContentCategory.name}">  </option>
+                                            <option  th:each="tbContentCategory :${tbContentCategories}"  th:value="*{tbContentCategory.id}" th:text="${tbContentCategory.name}">  </option>
                                         </select>
                                     </div>
                                 </div>
 
+                                <div class="form-group">
+                                    <label for="title"  class="col-sm-2 control-label">标题</label>
+
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="title"  th:field="*{content.title}" th:value="${content.title}" placeholder="请输入标题">
+                                    </div>
+                                </div>
+
+                                    <div class="form-group">
+                                        <label for="titleDesc"  class="col-sm-2 control-label">标题描述</label>
+
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="titleDesc"  th:field="*{content.titleDesc}" th:value="${content.titleDesc}" placeholder="请输入标题">
+                                        </div>
+                                    </div>
+
                                 <div class="form-group" >
                                     <label  class="col-sm-2 control-label" >内容</label>
                                     <div class="col-sm-10">
+                                        <input id="content" th:field="*{content.content}" type="hidden">
                                         <div id="editor">
-                                            <h1>你好</h1>
+                                              [[${content.content}]]
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="box-footer">
                                     <button type="button" class="btn btn-default"  onclick="history.go(-1)">返回</button>
-                                    <button type="submit" class="btn btn-info pull-right" >提交</button>
+                                    <button id="btnSubmit" type="submit" class="btn btn-info pull-right" >提交</button>
                                 </div>
                                 </form>
                             </div>
@@ -70,9 +86,7 @@
     </div>
 
     <th:block th:replace="include/copyright :: Copyright"/>
-    <!-- Add the sidebar's background. This div must be placed
-         immediately after the control sidebar -->
-    <div class="control-sidebar-bg"></div>
+
 </div>
 <!-- ./wrapper -->
 <th:block th:include="include/include :: footer"/>
@@ -80,6 +94,10 @@
     var E = window.wangEditor
     var editor = new E('#editor')
     editor.create()
+    $("#btnSubmit").bind("click", function() {
+        var contentHtml = editor.txt.html();
+        $("#content").val(contentHtml);
+    });
 </script>
 </body>
 </html>
